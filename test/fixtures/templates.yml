@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body_json: MyText
+  preview: MyString
+  price: MyString
+  client_id: 1
+  name: MyString
+  kind: MyString
+
+two:
+  body_json: MyText
+  preview: MyString
+  price: MyString
+  client_id: 1
+  name: MyString
+  kind: MyString
