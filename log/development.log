@@ -1,0 +1,1525 @@
+  [1m[36m (93.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (65.5ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateAttachments (20150529092041)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "attachments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "file" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150529092041"]]
+  [1m[35m (67.9ms)[0m  commit transaction
+Migrating to CreateClients (20150529094009)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "clients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "phone" varchar, "login" varchar, "password" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150529094009"]]
+  [1m[35m (120.4ms)[0m  commit transaction
+Migrating to CreateOrders (20150529114800)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "orders" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "client_id" integer, "operator_id" integer, "status" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150529114800"]]
+  [1m[35m (98.0ms)[0m  commit transaction
+Migrating to CreateItems (20150529114915)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "kind" varchar, "content" text, "static_comment" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150529114915"]]
+  [1m[35m (98.2ms)[0m  commit transaction
+Migrating to CreateConstructors (20150529120010)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "constructors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "content" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150529120010"]]
+  [1m[35m (120.3ms)[0m  commit transaction
+Migrating to CreateComments (20150529142047)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "commentable_id" integer, "commentable_type" varchar, "content" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150529142047"]]
+  [1m[35m (97.7ms)[0m  commit transaction
+Migrating to CreateOperators (20150529144226)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "operators" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar, "name" varchar, "password" varchar, "email" varchar, "phone" varchar, "kind" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150529144226"]]
+  [1m[35m (100.6ms)[0m  commit transaction
+Migrating to CreateTemplates (20150529144631)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "templates" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "body_json" text, "preview" varchar, "price" varchar, "client_id" integer, "name" varchar, "kind" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150529144631"]]
+  [1m[35m (98.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddConstructorIdToTemplate (20150529172515)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "templates" ADD "constructor_id" integer[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150529172515"]]
+  [1m[36m (101.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddOrderIdToItem (20150529172621)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "items" ADD "order_id" integer[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150529172621"]]
+  [1m[36m (92.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/orders" for 127.0.0.1 at 2015-06-09 16:39:18 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by OrdersController#index as HTML
+  [1m[35mOrder Load (0.1ms)[0m  SELECT "orders".* FROM "orders"
+  Rendered orders/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 1036ms (Views: 1006.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/constructors.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-06-09 16:39:19 +0300
+
+
+Started GET "/assets/scaffolds.self-03542e583aa27237325b4b11652246d557b27b19cd5dc77c0aaff23601414c40.css?body=1" for 127.0.0.1 at 2015-06-09 16:39:19 +0300
+
+
+Started GET "/assets/clients.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-06-09 16:39:19 +0300
+
+
+Started GET "/assets/orders.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-06-09 16:39:19 +0300
+
+
+Started GET "/assets/templates.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-06-09 16:39:19 +0300
+
+
+Started GET "/assets/clients.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-06-09 16:39:19 +0300
+
+
+Started GET "/assets/constructors.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-06-09 16:39:19 +0300
+
+
+Started GET "/assets/orders.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-06-09 16:39:19 +0300
+
+
+Started GET "/assets/templates.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-06-09 16:39:19 +0300
+
+
+Started GET "/orders/new" for 127.0.0.1 at 2015-06-09 16:39:22 +0300
+Processing by OrdersController#new as HTML
+  Rendered orders/_form.html.erb (36.4ms)
+  Rendered orders/new.html.erb within layouts/application (48.1ms)
+Completed 200 OK in 89ms (Views: 79.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/orders" for 127.0.0.1 at 2015-06-09 16:39:27 +0300
+Processing by OrdersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"C/7vxeui4H8vh0YYaxjG3p68r5dHSJ6mmVtK3cDa/tWQUDD57ZjJ7Oe5j3zzp8AKV6hL/MImzzP8nXw9RVi3RA==", "commit"=>"Create Order"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "orders" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2015-06-09 13:39:27.618840"], ["updated_at", "2015-06-09 13:39:27.618840"]]
+  [1m[36m (94.7ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/orders/1
+Completed 302 Found in 102ms (ActiveRecord: 95.0ms)
+
+
+Started GET "/orders/1" for 127.0.0.1 at 2015-06-09 16:39:27 +0300
+Processing by OrdersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOrder Load (0.2ms)[0m  SELECT  "orders".* FROM "orders" WHERE "orders"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered orders/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 55ms (Views: 28.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/orders" for 127.0.0.1 at 2015-06-09 16:39:34 +0300
+Processing by OrdersController#index as HTML
+  [1m[36mOrder Load (0.3ms)[0m  [1mSELECT "orders".* FROM "orders"[0m
+  Rendered orders/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 35ms (Views: 34.2ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/orders/1" for 127.0.0.1 at 2015-06-09 16:39:41 +0300
+Processing by OrdersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"lGa+aoPtyk5jsSgyRDwZNZbFSTsUFyv9x2FKwIaaqoAPyGFWhdfj3auP4Vbcgx/hX9GtUJF5emiip3wgAxjjEQ==", "id"=>"1"}
+  [1m[35mOrder Load (0.1ms)[0m  SELECT  "orders".* FROM "orders" WHERE "orders"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "orders" WHERE "orders"."id" = ?  [["id", 1]]
+  [1m[36m (80.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/orders
+Completed 302 Found in 83ms (ActiveRecord: 80.3ms)
+
+
+Started GET "/orders" for 127.0.0.1 at 2015-06-09 16:39:41 +0300
+Processing by OrdersController#index as HTML
+  [1m[35mOrder Load (0.3ms)[0m  SELECT "orders".* FROM "orders"
+  Rendered orders/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 52ms (Views: 51.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/clients" for 127.0.0.1 at 2015-06-09 16:39:49 +0300
+Processing by ClientsController#index as HTML
+  [1m[36mClient Load (0.2ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  Rendered clients/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 59ms (Views: 51.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/clients/new" for 127.0.0.1 at 2015-06-09 16:39:51 +0300
+Processing by ClientsController#new as HTML
+  Rendered clients/_form.html.erb (2.7ms)
+  Rendered clients/new.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 52ms (Views: 40.9ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/clients" for 127.0.0.1 at 2015-06-09 16:39:55 +0300
+Processing by ClientsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"T5n1hkm2VTN7ZXv42uFyILDwyR+JvO2wmedjAfMWLY3UNyq6T4x8oLNbspxCXnT0eeQtdAzSvCX8IVXhdpRkHA==", "commit"=>"Create Client"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "clients" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2015-06-09 13:39:55.389598"], ["updated_at", "2015-06-09 13:39:55.389598"]]
+  [1m[35m (103.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/clients/1
+Completed 302 Found in 106ms (ActiveRecord: 103.3ms)
+
+
+Started GET "/clients/1" for 127.0.0.1 at 2015-06-09 16:39:55 +0300
+Processing by ClientsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mClient Load (0.2ms)[0m  [1mSELECT  "clients".* FROM "clients" WHERE "clients"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered clients/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 35ms (Views: 34.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/clients" for 127.0.0.1 at 2015-06-09 16:39:56 +0300
+Processing by ClientsController#index as HTML
+  [1m[35mClient Load (0.3ms)[0m  SELECT "clients".* FROM "clients"
+  Rendered clients/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 37ms (Views: 35.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/clients/1" for 127.0.0.1 at 2015-06-09 16:39:58 +0300
+Processing by ClientsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mClient Load (0.2ms)[0m  [1mSELECT  "clients".* FROM "clients" WHERE "clients"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered clients/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 43ms (Views: 41.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/clients" for 127.0.0.1 at 2015-06-09 16:39:59 +0300
+Processing by ClientsController#index as HTML
+  [1m[35mClient Load (0.3ms)[0m  SELECT "clients".* FROM "clients"
+  Rendered clients/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 45ms (Views: 44.2ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/clients/1" for 127.0.0.1 at 2015-06-09 16:40:02 +0300
+Processing by ClientsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"1IupZ/BnYxHeGHksj2IQWpOeis2QzAKeETPACBqdTndPJXZb9l1KghYmsEgX3RaOWopuphWiUwt09fbonx8H5g==", "id"=>"1"}
+  [1m[36mClient Load (0.1ms)[0m  [1mSELECT  "clients".* FROM "clients" WHERE "clients"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "clients" WHERE "clients"."id" = ?[0m  [["id", 1]]
+  [1m[35m (99.5ms)[0m  commit transaction
+Redirected to http://localhost:3000/clients
+Completed 302 Found in 102ms (ActiveRecord: 99.9ms)
+
+
+Started GET "/clients" for 127.0.0.1 at 2015-06-09 16:40:02 +0300
+Processing by ClientsController#index as HTML
+  [1m[36mClient Load (0.2ms)[0m  [1mSELECT "clients".* FROM "clients"[0m
+  Rendered clients/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 38ms (Views: 37.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/operator" for 127.0.0.1 at 2015-06-09 16:41:02 +0300
+
+ActionController::RoutingError (No route matches [GET] "/operator"):
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.1.2) lib/web_console/middleware.rb:37:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.1) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.1) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.1) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  rack (1.6.1) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.1) lib/rack/handler/webrick.rb:89:in `service'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.5ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (19.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (106.5ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (16.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (31.6ms)
+
+
+Started GET "/operators" for 127.0.0.1 at 2015-06-09 16:41:06 +0300
+
+ActionController::RoutingError (No route matches [GET] "/operators"):
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.1.2) lib/web_console/middleware.rb:37:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.1) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.1) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.1) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  rack (1.6.1) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.1) lib/rack/handler/webrick.rb:89:in `service'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.4ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.7ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (28.8ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.6ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (13.6ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (25.8ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddDeviseToOperators (20150609142633)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "operators" ADD "email" varchar DEFAULT '' NOT NULL[0m
+SQLite3::SQLException: duplicate column name: email: ALTER TABLE "operators" ADD "email" varchar DEFAULT '' NOT NULL
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddDeviseToOperators (20150609142633)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "operators" ADD "email" varchar DEFAULT '' NOT NULL[0m
+SQLite3::SQLException: duplicate column name: email: ALTER TABLE "operators" ADD "email" varchar DEFAULT '' NOT NULL
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateActiveAdminComments (20150609142635)
+  [1m[35m (0.1ms)[0m  begin transaction
+DEPRECATION WARNING: `#timestamp` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /home/dentada/generator/db/migrate/20150609142635_create_active_admin_comments.rb:9)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "active_admin_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "namespace" varchar, "body" text, "resource_id" varchar NOT NULL, "resource_type" varchar NOT NULL, "author_id" integer, "author_type" varchar, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_active_admin_comments_on_namespace" ON "active_admin_comments" ("namespace")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_active_admin_comments_on_author_type_and_author_id" ON "active_admin_comments" ("author_type", "author_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_author_type_and_author_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_author_type_and_author_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_active_admin_comments_on_resource_type_and_resource_id" ON "active_admin_comments" ("resource_type", "resource_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150609142635"]]
+  [1m[35m (110.1ms)[0m  commit transaction
+Migrating to DeviseCreateAdmins (20150609144709)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_admins_on_email" ON "admins" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_email' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE UNIQUE INDEX "index_admins_on_reset_password_token" ON "admins" ("reset_password_token")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150609144709"]]
+  [1m[36m (119.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_resource_type_and_resource_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_resource_type_and_resource_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_author_type_and_author_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_author_type_and_author_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_email' AND type='index'
+[0m
+
+
+Started GET "/admin" for 127.0.0.1 at 2015-06-09 17:49:33 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Admin::DashboardController#index as HTML
+Completed 401 Unauthorized in 12ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/login" for 127.0.0.1 at 2015-06-09 17:49:33 +0300
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/devise/shared/_links.erb (1.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (213.6ms)
+Completed 200 OK in 4262ms (Views: 4230.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/active_admin/print.self-190eac4143d87d98ec2543ee37e8c913cabea616b02542ee62b4e69f52a3afe0.css?body=1" for 127.0.0.1 at 2015-06-09 17:49:38 +0300
+
+
+Started GET "/assets/active_admin.self-a4427c568c5192510bcc8277e5652e3a98b29a4389d6c67d490316ee0fd637c0.css?body=1" for 127.0.0.1 at 2015-06-09 17:49:38 +0300
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2015-06-09 17:49:55 +0300
+Processing by ActiveAdmin::Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lpzJ/0U7TWcM68EEbYfnud7VBQ5XUbcjrOMMicZMQBMNMhbDQwFk9MTVCGD1OOFtF8HhZdI/5rbJJTppQ84Jgg==", "operator"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  [1m[35mOperator Load (0.2ms)[0m  SELECT  "operators".* FROM "operators" WHERE "operators"."email" = ?  ORDER BY "operators"."id" ASC LIMIT 1  [["email", "admin@example.com"]]
+Completed 401 Unauthorized in 25ms (ActiveRecord: 0.2ms)
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lpzJ/0U7TWcM68EEbYfnud7VBQ5XUbcjrOMMicZMQBMNMhbDQwFk9MTVCGD1OOFtF8HhZdI/5rbJJTppQ84Jgg==", "operator"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+Completed 500 Internal Server Error in 68ms (ActiveRecord: 0.0ms)
+
+NoMethodError (undefined method `encrypted_password=' for #<Operator:0x007f82e2820188>):
+  activemodel (4.2.1) lib/active_model/attribute_methods.rb:433:in `method_missing'
+  devise (3.5.1) lib/devise/models/database_authenticatable.rb:42:in `password='
+  activerecord (4.2.1) lib/active_record/attribute_assignment.rb:54:in `public_send'
+  activerecord (4.2.1) lib/active_record/attribute_assignment.rb:54:in `_assign_attribute'
+  activerecord (4.2.1) lib/active_record/attribute_assignment.rb:41:in `block in assign_attributes'
+  actionpack (4.2.1) lib/action_controller/metal/strong_parameters.rb:183:in `each_pair'
+  actionpack (4.2.1) lib/action_controller/metal/strong_parameters.rb:183:in `each_pair'
+  activerecord (4.2.1) lib/active_record/attribute_assignment.rb:35:in `assign_attributes'
+  activerecord (4.2.1) lib/active_record/core.rb:559:in `init_attributes'
+  activerecord (4.2.1) lib/active_record/core.rb:281:in `initialize'
+  activerecord (4.2.1) lib/active_record/inheritance.rb:61:in `new'
+  activerecord (4.2.1) lib/active_record/inheritance.rb:61:in `new'
+  devise (3.5.1) app/controllers/devise/sessions_controller.rb:9:in `new'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  devise (3.5.1) lib/devise/failure_app.rb:53:in `call'
+  devise (3.5.1) lib/devise/failure_app.rb:53:in `recall'
+  devise (3.5.1) lib/devise/failure_app.rb:37:in `respond'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  devise (3.5.1) lib/devise/failure_app.rb:22:in `call'
+  devise (3.5.1) lib/devise/failure_app.rb:22:in `call'
+  devise (3.5.1) lib/devise/delegator.rb:5:in `call'
+  warden (1.2.3) lib/warden/manager.rb:130:in `call_failure_app'
+  warden (1.2.3) lib/warden/manager.rb:116:in `process_unauthenticated'
+  warden (1.2.3) lib/warden/manager.rb:47:in `call'
+  rack (1.6.1) lib/rack/etag.rb:24:in `call'
+  rack (1.6.1) lib/rack/conditionalget.rb:38:in `call'
+  rack (1.6.1) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:649:in `call'
+  activerecord (4.2.1) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_call_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.1.2) lib/web_console/middleware.rb:37:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.1) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.1) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.1) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  rack (1.6.1) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.1) lib/rack/handler/webrick.rb:89:in `service'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.1ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (22.0ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (14.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (28.1ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseCreateAdminUsers (20150609145935)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "admin_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_admin_users_on_email" ON "admin_users" ("email")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admin_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admin_users_on_email' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_admin_users_on_reset_password_token" ON "admin_users" ("reset_password_token")[0m
+  [1m[35mAdminUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "admin_users" WHERE "admin_users"."email" = 'admin@example.com' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "admin_users" ("email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "admin@example.com"], ["encrypted_password", "$2a$10$lIklRDyMyzpbnELSwDs6MeEQ9oZX1rIjNGCEydDBRFCn00p6X5C2i"], ["created_at", "2015-06-09 15:00:07.618240"], ["updated_at", "2015-06-09 15:00:07.618240"]]
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150609145935"]]
+  [1m[36m (127.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_resource_type_and_resource_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_resource_type_and_resource_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_author_type_and_author_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_author_type_and_author_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admin_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admin_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admin_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admin_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_email' AND type='index'
+[0m
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2015-06-09 18:00:23 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ActiveAdmin::Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lpzJ/0U7TWcM68EEbYfnud7VBQ5XUbcjrOMMicZMQBMNMhbDQwFk9MTVCGD1OOFtF8HhZdI/5rbJJTppQ84Jgg==", "operator"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+Completed 401 Unauthorized in 11ms (ActiveRecord: 0.0ms)
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lpzJ/0U7TWcM68EEbYfnud7VBQ5XUbcjrOMMicZMQBMNMhbDQwFk9MTVCGD1OOFtF8HhZdI/5rbJJTppQ84Jgg==", "operator"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/devise/shared/_links.erb (11.0ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (41.0ms)
+Completed 200 OK in 354ms (Views: 345.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2015-06-09 18:01:18 +0300
+Processing by ActiveAdmin::Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rXHR4ADNZIqKbAHghiRoXNkiBQASQAVc1OX59JmBT0A23w7cBvdNGUJSyIQem26IEDbha5cuVMmxI88UHAMG0Q==", "admin_user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  [1m[35mAdminUser Load (0.3ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["email", "admin@example.com"]]
+Completed 401 Unauthorized in 102ms (ActiveRecord: 0.3ms)
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rXHR4ADNZIqKbAHghiRoXNkiBQASQAVc1OX59JmBT0A23w7cBvdNGUJSyIQem26IEDbha5cuVMmxI88UHAMG0Q==", "admin_user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/devise/shared/_links.erb (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (26.7ms)
+Completed 200 OK in 215ms (Views: 147.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/admin/login" for 127.0.0.1 at 2015-06-09 18:02:24 +0300
+Processing by ActiveAdmin::Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LPzaOuKQfq5j/JLXooCP3v0aQs+gFjOMyNqMsP+rvy23UgUG5KpXPavCW7M6P4kKNA6mpCV4YhmtHLpQein2vA==", "admin_user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Login"}
+  [1m[36mAdminUser Load (0.1ms)[0m  [1mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1[0m  [["email", "admin@example.com"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "admin_users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "last_sign_in_ip" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "admin_users"."id" = ?[0m  [["last_sign_in_at", "2015-06-09 15:02:24.728066"], ["current_sign_in_at", "2015-06-09 15:02:24.728066"], ["last_sign_in_ip", "127.0.0.1"], ["current_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", "2015-06-09 15:02:24.729020"], ["id", 1]]
+  [1m[35m (129.9ms)[0m  commit transaction
+Redirected to http://localhost:3000/admin
+Completed 302 Found in 220ms (ActiveRecord: 131.0ms)
+
+
+Started GET "/admin" for 127.0.0.1 at 2015-06-09 18:02:24 +0300
+Processing by Admin::DashboardController#index as HTML
+  [1m[36mAdminUser Load (0.2ms)[0m  [1mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/page/index.html.arb (126.3ms)
+Completed 200 OK in 138ms (Views: 127.7ms | ActiveRecord: 0.2ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_resource_type_and_resource_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_resource_type_and_resource_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_author_type_and_author_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_author_type_and_author_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admin_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admin_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admin_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admin_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_email' AND type='index'
+[0m
+
+
+Started GET "/admin" for 127.0.0.1 at 2015-06-09 18:06:00 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Admin::DashboardController#index as HTML
+  [1m[35mAdminUser Load (0.2ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/page/index.html.arb (307.8ms)
+Completed 200 OK in 341ms (Views: 313.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/active_admin.self-a4427c568c5192510bcc8277e5652e3a98b29a4389d6c67d490316ee0fd637c0.css?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/print.self-190eac4143d87d98ec2543ee37e8c913cabea616b02542ee62b4e69f52a3afe0.css?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery-ui/core.self-93be4d22eda916787802a64d8f88b52db8a9027d4ccbbc0942625324a7d12d44.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery-ui/datepicker.self-6267be6d4d0f0e8665be3b4d6ac07f40ba23a32aff8eaa5d1bfc00f76a9eeae7.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery-ui/widget.self-c1602241ddc51216b58391768667068867b8e15b9efc722befcd25771eda6819.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery-ui/button.self-4d4f21ba77bbf8cc08ae65e2b6329a7a1b952b32c3ba7bffca8313e7e8c93d0c.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery-ui/mouse.self-c513294e8da73f31f84ba3ef11e2a1180a47faea0eb2fea4a53fc26153dd21fd.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery-ui/draggable.self-debcca3d0d5d9afe2fe91a6fd1aebdb41ca0a55f2f6017352e6c02b6d8a6e64c.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery-ui/position.self-e693ced4ecfa1a276f0b794f32c1d30d792764b08788bf68ecfa3b388c291333.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery-ui/resizable.self-60b870565f3cd62982c1907828119bb51f42ec8228d5e23868153edc3abc685c.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery-ui/dialog.self-5a6c7980dfa3f6b74445b0f4b20eed799ee65363163500ed7f032e603d6b022d.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery-ui/sortable.self-df2d80a36f9dfbe0facc596ccd92af83ca50d38e4cd6a84810aaf5d40b8cd181.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery-ui/tabs.self-dc07b44bf1b926c8d28ccd2658e30933881e5329348caf70cf305c3943f6bbd7.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/base.self-ab2cb3098b53fe7d229937d768d701e8f4013f2a5aea7988d8f2149fa40426db.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/lib/batch_actions.self-10ee4c07784b00259ca97a02c4e7fb53c1b27ebe5653a3b910426b4ea0941250.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/lib/checkbox-toggler.self-ffdc88fc1b3b6bcfac3e314f191fc486175ab5a4b5daab87af6bd208cb483bd8.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/lib/dropdown-menu.self-161387c54d1640bd9f174301b77d73ea88ce6d7daf0d7356bd50b4d0143d1b72.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/lib/flash.self-8f05a5d9328ea28fca100b057787fbfb567986513c5f1735ea48fad8f9571c10.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/lib/has_many.self-ece319debdc01ca5096ae8ac6c130ffc0decab382543b4b94e18591375d3d3bb.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/lib/modal_dialog.self-766fcab3d4b4cea253c79b999c91c278487f6306fc9e176d0fd2168590a63ac4.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/lib/table-checkbox-toggler.self-f5200d732ec9ffd4ee8fd1fe11524ad7b54a67f6c0ef447a29d119ece2dcecdb.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/lib/per_page.self-d7697643296439a8f6aadbf22a229d8ce9b4e8e530ca854164398141006bcfda.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery-ui.self-f96f2ec2a32c4bc4da4292cc74bddeca0bb223d81a421c98c4d613632860945e.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery.self-da8dafbbe883092bcae73f35a8caf4ae6170fe7d8130ae7039a233f9b509c757.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin/application.self-50ffc9f86e474cd52ffb7ce3b3572255ad6646ea17097a056f330b540eae402c.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/assets/active_admin.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:01 +0300
+
+
+Started GET "/admin" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+Processing by Admin::DashboardController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/page/index.html.arb (150.6ms)
+Completed 200 OK in 155ms (Views: 152.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/active_admin.self-a4427c568c5192510bcc8277e5652e3a98b29a4389d6c67d490316ee0fd637c0.css?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/print.self-190eac4143d87d98ec2543ee37e8c913cabea616b02542ee62b4e69f52a3afe0.css?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery-ui/core.self-93be4d22eda916787802a64d8f88b52db8a9027d4ccbbc0942625324a7d12d44.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery-ui/widget.self-c1602241ddc51216b58391768667068867b8e15b9efc722befcd25771eda6819.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery-ui/datepicker.self-6267be6d4d0f0e8665be3b4d6ac07f40ba23a32aff8eaa5d1bfc00f76a9eeae7.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery-ui/button.self-4d4f21ba77bbf8cc08ae65e2b6329a7a1b952b32c3ba7bffca8313e7e8c93d0c.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery-ui/mouse.self-c513294e8da73f31f84ba3ef11e2a1180a47faea0eb2fea4a53fc26153dd21fd.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery-ui/draggable.self-debcca3d0d5d9afe2fe91a6fd1aebdb41ca0a55f2f6017352e6c02b6d8a6e64c.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery-ui/position.self-e693ced4ecfa1a276f0b794f32c1d30d792764b08788bf68ecfa3b388c291333.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery-ui/resizable.self-60b870565f3cd62982c1907828119bb51f42ec8228d5e23868153edc3abc685c.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery-ui/dialog.self-5a6c7980dfa3f6b74445b0f4b20eed799ee65363163500ed7f032e603d6b022d.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery-ui/sortable.self-df2d80a36f9dfbe0facc596ccd92af83ca50d38e4cd6a84810aaf5d40b8cd181.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery-ui/tabs.self-dc07b44bf1b926c8d28ccd2658e30933881e5329348caf70cf305c3943f6bbd7.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/base.self-ab2cb3098b53fe7d229937d768d701e8f4013f2a5aea7988d8f2149fa40426db.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/lib/batch_actions.self-10ee4c07784b00259ca97a02c4e7fb53c1b27ebe5653a3b910426b4ea0941250.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/lib/checkbox-toggler.self-ffdc88fc1b3b6bcfac3e314f191fc486175ab5a4b5daab87af6bd208cb483bd8.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/lib/dropdown-menu.self-161387c54d1640bd9f174301b77d73ea88ce6d7daf0d7356bd50b4d0143d1b72.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/lib/flash.self-8f05a5d9328ea28fca100b057787fbfb567986513c5f1735ea48fad8f9571c10.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/lib/has_many.self-ece319debdc01ca5096ae8ac6c130ffc0decab382543b4b94e18591375d3d3bb.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/lib/modal_dialog.self-766fcab3d4b4cea253c79b999c91c278487f6306fc9e176d0fd2168590a63ac4.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/lib/per_page.self-d7697643296439a8f6aadbf22a229d8ce9b4e8e530ca854164398141006bcfda.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/lib/table-checkbox-toggler.self-f5200d732ec9ffd4ee8fd1fe11524ad7b54a67f6c0ef447a29d119ece2dcecdb.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery-ui.self-f96f2ec2a32c4bc4da4292cc74bddeca0bb223d81a421c98c4d613632860945e.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery.self-da8dafbbe883092bcae73f35a8caf4ae6170fe7d8130ae7039a233f9b509c757.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin/application.self-50ffc9f86e474cd52ffb7ce3b3572255ad6646ea17097a056f330b540eae402c.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/assets/active_admin.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-06-09 18:06:05 +0300
+
+
+Started GET "/admin/admin_users" for 127.0.0.1 at 2015-06-09 18:06:08 +0300
+Processing by Admin::AdminUsersController#index as HTML
+  [1m[35mAdminUser Load (0.2ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "admin_users" LIMIT 30 OFFSET 0) subquery_for_count[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "admin_users" LIMIT 30 OFFSET 0) subquery_for_count
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "admin_users"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "admin_users" LIMIT 30 OFFSET 0) subquery_for_count
+  [1m[36mAdminUser Load (0.2ms)[0m  [1mSELECT  "admin_users".* FROM "admin_users"  ORDER BY "admin_users"."id" desc LIMIT 30 OFFSET 0[0m
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/resource/index.html.arb (223.3ms)
+Completed 200 OK in 236ms (Views: 227.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/admin/constructors" for 127.0.0.1 at 2015-06-09 18:06:10 +0300
+Processing by Admin::ConstructorsController#index as HTML
+  [1m[35mAdminUser Load (0.1ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "constructors" LIMIT 30 OFFSET 0) subquery_for_count[0m
+  [1m[35mTemplate Load (0.1ms)[0m  SELECT "templates".* FROM "templates"
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/resource/index.html.arb (205.7ms)
+Completed 200 OK in 211ms (Views: 207.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/admin/constructors/new" for 127.0.0.1 at 2015-06-09 18:06:13 +0300
+Processing by Admin::ConstructorsController#new as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/resource/new.html.arb (143.3ms)
+Completed 200 OK in 150ms (Views: 145.3ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/admin/constructors" for 127.0.0.1 at 2015-06-09 18:07:11 +0300
+Processing by Admin::ConstructorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HzMA8SUme+jSCfoqIN0MIYFixqaq/mtUDbYs63Hx529ublM/NfmXDed5gpAkmg2L0T7LlqS5+MdK81qLKaRp8g==", "constructor"=>{"name"=>"Конструктор визиток", "content"=>"Код конструктора"}, "commit"=>"Create Constructor"}
+  [1m[35mAdminUser Load (0.1ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.1ms)
+
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  activemodel (4.2.1) lib/active_model/forbidden_attributes_protection.rb:21:in `sanitize_for_mass_assignment'
+  activerecord (4.2.1) lib/active_record/attribute_assignment.rb:33:in `assign_attributes'
+  activerecord (4.2.1) lib/active_record/core.rb:559:in `init_attributes'
+  activerecord (4.2.1) lib/active_record/core.rb:281:in `initialize'
+  activerecord (4.2.1) lib/active_record/inheritance.rb:61:in `new'
+  activerecord (4.2.1) lib/active_record/inheritance.rb:61:in `new'
+  /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/lib/active_admin/resource_controller/data_access.rb:138:in `build_new_resource'
+  /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/lib/active_admin/resource_controller/data_access.rb:121:in `build_resource'
+  inherited_resources (1.6.0) lib/inherited_resources/actions.rb:31:in `create'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `call'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.6.1) lib/rack/etag.rb:24:in `call'
+  rack (1.6.1) lib/rack/conditionalget.rb:38:in `call'
+  rack (1.6.1) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:649:in `call'
+  activerecord (4.2.1) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_call_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.1.2) lib/web_console/middleware.rb:37:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.1) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.1) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.1) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  rack (1.6.1) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.1) lib/rack/handler/webrick.rb:89:in `service'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.0ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (26.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (13.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (26.1ms)
+
+
+Started POST "/admin/constructors" for 127.0.0.1 at 2015-06-09 18:10:48 +0300
+
+SyntaxError (/home/dentada/generator/app/admin/constructor.rb:6: syntax error, unexpected ':', expecting keyword_end
+permit_params :name :content
+                     ^):
+  app/admin/constructor.rb:6: syntax error, unexpected ':', expecting keyword_end
+  config/routes.rb:4:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.7ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.1ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (21.6ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.8ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (16.4ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (31.2ms)
+
+
+Started POST "/admin/constructors" for 127.0.0.1 at 2015-06-09 18:11:19 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Admin::ConstructorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HzMA8SUme+jSCfoqIN0MIYFixqaq/mtUDbYs63Hx529ublM/NfmXDed5gpAkmg2L0T7LlqS5+MdK81qLKaRp8g==", "constructor"=>{"name"=>"Конструктор визиток", "content"=>"Код конструктора"}, "commit"=>"Create Constructor"}
+  [1m[35mAdminUser Load (0.2ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "constructors" ("name", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Конструктор визиток"], ["content", "Код конструктора"], ["created_at", "2015-06-09 15:11:19.979297"], ["updated_at", "2015-06-09 15:11:19.979297"]]
+  [1m[36m (158.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/admin/constructors/1
+Completed 302 Found in 202ms (ActiveRecord: 160.2ms)
+
+
+Started GET "/admin/constructors/1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+Processing by Admin::ConstructorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mAdminUser Load (0.1ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mConstructor Load (0.1ms)[0m  [1mSELECT  "constructors".* FROM "constructors" WHERE "constructors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?  [["resource_type", "Constructor"], ["resource_id", "1"], ["namespace", "admin"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Constructor"], ["resource_id", "1"], ["namespace", "admin"]]
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/resource/show.html.arb (398.0ms)
+Completed 200 OK in 403ms (Views: 399.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/active_admin/print.self-190eac4143d87d98ec2543ee37e8c913cabea616b02542ee62b4e69f52a3afe0.css?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin.self-a4427c568c5192510bcc8277e5652e3a98b29a4389d6c67d490316ee0fd637c0.css?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery-ui/core.self-93be4d22eda916787802a64d8f88b52db8a9027d4ccbbc0942625324a7d12d44.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery-ui/button.self-4d4f21ba77bbf8cc08ae65e2b6329a7a1b952b32c3ba7bffca8313e7e8c93d0c.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery-ui/widget.self-c1602241ddc51216b58391768667068867b8e15b9efc722befcd25771eda6819.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery-ui/datepicker.self-6267be6d4d0f0e8665be3b4d6ac07f40ba23a32aff8eaa5d1bfc00f76a9eeae7.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery-ui/mouse.self-c513294e8da73f31f84ba3ef11e2a1180a47faea0eb2fea4a53fc26153dd21fd.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery-ui/draggable.self-debcca3d0d5d9afe2fe91a6fd1aebdb41ca0a55f2f6017352e6c02b6d8a6e64c.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery-ui/position.self-e693ced4ecfa1a276f0b794f32c1d30d792764b08788bf68ecfa3b388c291333.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery-ui/resizable.self-60b870565f3cd62982c1907828119bb51f42ec8228d5e23868153edc3abc685c.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery-ui/dialog.self-5a6c7980dfa3f6b74445b0f4b20eed799ee65363163500ed7f032e603d6b022d.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery-ui/sortable.self-df2d80a36f9dfbe0facc596ccd92af83ca50d38e4cd6a84810aaf5d40b8cd181.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery-ui/tabs.self-dc07b44bf1b926c8d28ccd2658e30933881e5329348caf70cf305c3943f6bbd7.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/base.self-ab2cb3098b53fe7d229937d768d701e8f4013f2a5aea7988d8f2149fa40426db.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/lib/batch_actions.self-10ee4c07784b00259ca97a02c4e7fb53c1b27ebe5653a3b910426b4ea0941250.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/lib/checkbox-toggler.self-ffdc88fc1b3b6bcfac3e314f191fc486175ab5a4b5daab87af6bd208cb483bd8.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/lib/dropdown-menu.self-161387c54d1640bd9f174301b77d73ea88ce6d7daf0d7356bd50b4d0143d1b72.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/lib/flash.self-8f05a5d9328ea28fca100b057787fbfb567986513c5f1735ea48fad8f9571c10.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/lib/has_many.self-ece319debdc01ca5096ae8ac6c130ffc0decab382543b4b94e18591375d3d3bb.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/lib/modal_dialog.self-766fcab3d4b4cea253c79b999c91c278487f6306fc9e176d0fd2168590a63ac4.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/lib/per_page.self-d7697643296439a8f6aadbf22a229d8ce9b4e8e530ca854164398141006bcfda.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/lib/table-checkbox-toggler.self-f5200d732ec9ffd4ee8fd1fe11524ad7b54a67f6c0ef447a29d119ece2dcecdb.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery-ui.self-f96f2ec2a32c4bc4da4292cc74bddeca0bb223d81a421c98c4d613632860945e.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery.self-da8dafbbe883092bcae73f35a8caf4ae6170fe7d8130ae7039a233f9b509c757.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin/application.self-50ffc9f86e474cd52ffb7ce3b3572255ad6646ea17097a056f330b540eae402c.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/assets/active_admin.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-06-09 18:11:20 +0300
+
+
+Started GET "/admin/constructors" for 127.0.0.1 at 2015-06-09 18:11:28 +0300
+Processing by Admin::ConstructorsController#index as HTML
+  [1m[35mAdminUser Load (0.2ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "constructors" LIMIT 30 OFFSET 0) subquery_for_count[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "constructors" LIMIT 30 OFFSET 0) subquery_for_count
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "constructors"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "constructors" LIMIT 30 OFFSET 0) subquery_for_count
+  [1m[36mConstructor Load (0.1ms)[0m  [1mSELECT  "constructors".* FROM "constructors"  ORDER BY "constructors"."id" desc LIMIT 30 OFFSET 0[0m
+  [1m[35mTemplate Load (0.1ms)[0m  SELECT "templates".* FROM "templates"
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/resource/index.html.arb (193.1ms)
+Completed 200 OK in 203ms (Views: 195.9ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/admin/constructors/1" for 127.0.0.1 at 2015-06-09 18:11:33 +0300
+Processing by Admin::ConstructorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAdminUser Load (0.2ms)[0m  [1mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mConstructor Load (0.1ms)[0m  SELECT  "constructors".* FROM "constructors" WHERE "constructors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Constructor"], ["resource_id", "1"], ["namespace", "admin"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?  [["resource_type", "Constructor"], ["resource_id", "1"], ["namespace", "admin"]]
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/resource/show.html.arb (163.2ms)
+Completed 200 OK in 170ms (Views: 166.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/admin/dashboard" for 127.0.0.1 at 2015-06-09 18:19:21 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Admin::DashboardController#index as HTML
+  [1m[35mAdminUser Load (0.2ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/page/index.html.arb (317.5ms)
+Completed 200 OK in 344ms (Views: 321.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/admin/operators" for 127.0.0.1 at 2015-06-09 18:19:22 +0300
+Processing by Admin::OperatorsController#index as HTML
+  [1m[36mAdminUser Load (0.1ms)[0m  [1mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "operators" LIMIT 30 OFFSET 0) subquery_for_count
+  [1m[36mOrder Load (0.1ms)[0m  [1mSELECT "orders".* FROM "orders"[0m
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments"
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/resource/index.html.arb (208.7ms)
+Completed 200 OK in 226ms (Views: 215.4ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/admin/operators/new" for 127.0.0.1 at 2015-06-09 18:19:30 +0300
+Processing by Admin::OperatorsController#new as HTML
+  [1m[36mAdminUser Load (0.2ms)[0m  [1mSELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/resource/new.html.arb (182.7ms)
+Completed 200 OK in 192ms (Views: 184.6ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/admin/operators" for 127.0.0.1 at 2015-06-09 18:20:09 +0300
+Processing by Admin::OperatorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"pNij6MgCKXuwyofT2jXLInXA3oNL0eTjUMVWFicMiN7VhfAm2N3FnoW6/2necsqIJZzTs0WWd3AXgCB2f1kGQw==", "operator"=>{"login"=>"Operator1", "name"=>"Евгений", "password"=>"[FILTERED]", "email"=>"shade2004@gmail.com", "phone"=>"+79213675937", "kind"=>""}, "commit"=>"Create Operator"}
+  [1m[35mAdminUser Load (0.1ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 500 Internal Server Error in 68ms (ActiveRecord: 0.1ms)
+
+NoMethodError (undefined method `encrypted_password=' for #<Operator:0x007f039b9279d0>):
+  activemodel (4.2.1) lib/active_model/attribute_methods.rb:433:in `method_missing'
+  devise (3.5.1) lib/devise/models/database_authenticatable.rb:42:in `password='
+  activerecord (4.2.1) lib/active_record/attribute_assignment.rb:54:in `public_send'
+  activerecord (4.2.1) lib/active_record/attribute_assignment.rb:54:in `_assign_attribute'
+  activerecord (4.2.1) lib/active_record/attribute_assignment.rb:41:in `block in assign_attributes'
+  actionpack (4.2.1) lib/action_controller/metal/strong_parameters.rb:183:in `each_pair'
+  actionpack (4.2.1) lib/action_controller/metal/strong_parameters.rb:183:in `each_pair'
+  activerecord (4.2.1) lib/active_record/attribute_assignment.rb:35:in `assign_attributes'
+  activerecord (4.2.1) lib/active_record/core.rb:559:in `init_attributes'
+  activerecord (4.2.1) lib/active_record/core.rb:281:in `initialize'
+  activerecord (4.2.1) lib/active_record/inheritance.rb:61:in `new'
+  activerecord (4.2.1) lib/active_record/inheritance.rb:61:in `new'
+  /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/lib/active_admin/resource_controller/data_access.rb:138:in `build_new_resource'
+  /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/lib/active_admin/resource_controller/data_access.rb:121:in `build_resource'
+  inherited_resources (1.6.0) lib/inherited_resources/actions.rb:31:in `create'
+  actionpack (4.2.1) lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.1) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.1) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.1) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.1) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.1) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `call'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.1) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.1) lib/action_dispatch/routing/route_set.rb:819:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.6.1) lib/rack/etag.rb:24:in `call'
+  rack (1.6.1) lib/rack/conditionalget.rb:38:in `call'
+  rack (1.6.1) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.1) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.1) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:649:in `call'
+  activerecord (4.2.1) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:776:in `_run_call_callbacks'
+  activesupport (4.2.1) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.1.2) lib/web_console/middleware.rb:37:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.1) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.1) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.1) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.1) lib/rack/lock.rb:17:in `call'
+  rack (1.6.1) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.1) lib/rack/handler/webrick.rb:89:in `service'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/dentada/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.0ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (19.7ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/console.js.erb within layouts/javascript (15.0ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.2/lib/web_console/templates/index.html.erb (30.5ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_resource_type_and_resource_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_resource_type_and_resource_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_author_type_and_author_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_author_type_and_author_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_active_admin_comments_on_namespace' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admin_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admin_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admin_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admin_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_admins_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_admins_on_email' AND type='index'
+[0m
+
+
+Started POST "/admin/operators" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Admin::OperatorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"pNij6MgCKXuwyofT2jXLInXA3oNL0eTjUMVWFicMiN7VhfAm2N3FnoW6/2necsqIJZzTs0WWd3AXgCB2f1kGQw==", "operator"=>{"login"=>"Operator1", "name"=>"Евгений", "password"=>"[FILTERED]", "email"=>"shade2004@gmail.com", "phone"=>"+79213675937", "kind"=>""}, "commit"=>"Create Operator"}
+  [1m[35mAdminUser Load (0.2ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "operators" ("name", "email", "phone", "login", "password", "kind", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Евгений"], ["email", "shade2004@gmail.com"], ["phone", "+79213675937"], ["login", "Operator1"], ["password", "testoperator"], ["kind", ""], ["created_at", "2015-06-09 15:24:51.223742"], ["updated_at", "2015-06-09 15:24:51.223742"]]
+  [1m[36m (95.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/admin/operators/1
+Completed 302 Found in 140ms (ActiveRecord: 96.6ms)
+
+
+Started GET "/admin/operators/1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+Processing by Admin::OperatorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mAdminUser Load (0.1ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mOperator Load (0.2ms)[0m  [1mSELECT  "operators".* FROM "operators" WHERE "operators"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?  [["resource_type", "Operator"], ["resource_id", "1"], ["namespace", "admin"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT COUNT(*) FROM "active_admin_comments" WHERE "active_admin_comments"."resource_type" = ? AND "active_admin_comments"."resource_id" = ? AND "active_admin_comments"."namespace" = ?[0m  [["resource_type", "Operator"], ["resource_id", "1"], ["namespace", "admin"]]
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/resource/show.html.arb (377.7ms)
+Completed 200 OK in 383ms (Views: 379.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/active_admin/print.self-190eac4143d87d98ec2543ee37e8c913cabea616b02542ee62b4e69f52a3afe0.css?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin.self-a4427c568c5192510bcc8277e5652e3a98b29a4389d6c67d490316ee0fd637c0.css?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery-ui/datepicker.self-6267be6d4d0f0e8665be3b4d6ac07f40ba23a32aff8eaa5d1bfc00f76a9eeae7.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery-ui/core.self-93be4d22eda916787802a64d8f88b52db8a9027d4ccbbc0942625324a7d12d44.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery-ui/widget.self-c1602241ddc51216b58391768667068867b8e15b9efc722befcd25771eda6819.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery-ui/button.self-4d4f21ba77bbf8cc08ae65e2b6329a7a1b952b32c3ba7bffca8313e7e8c93d0c.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery-ui/mouse.self-c513294e8da73f31f84ba3ef11e2a1180a47faea0eb2fea4a53fc26153dd21fd.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery-ui/draggable.self-debcca3d0d5d9afe2fe91a6fd1aebdb41ca0a55f2f6017352e6c02b6d8a6e64c.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery-ui/position.self-e693ced4ecfa1a276f0b794f32c1d30d792764b08788bf68ecfa3b388c291333.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery-ui/resizable.self-60b870565f3cd62982c1907828119bb51f42ec8228d5e23868153edc3abc685c.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery-ui/dialog.self-5a6c7980dfa3f6b74445b0f4b20eed799ee65363163500ed7f032e603d6b022d.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery-ui/sortable.self-df2d80a36f9dfbe0facc596ccd92af83ca50d38e4cd6a84810aaf5d40b8cd181.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery-ui/tabs.self-dc07b44bf1b926c8d28ccd2658e30933881e5329348caf70cf305c3943f6bbd7.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/jquery_ujs.self-8e98a7a072a6cee1372d19fff9ff3e6aa1e39a37d89d6f06861637d061113ee7.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/base.self-ab2cb3098b53fe7d229937d768d701e8f4013f2a5aea7988d8f2149fa40426db.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/lib/batch_actions.self-10ee4c07784b00259ca97a02c4e7fb53c1b27ebe5653a3b910426b4ea0941250.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/lib/checkbox-toggler.self-ffdc88fc1b3b6bcfac3e314f191fc486175ab5a4b5daab87af6bd208cb483bd8.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/lib/dropdown-menu.self-161387c54d1640bd9f174301b77d73ea88ce6d7daf0d7356bd50b4d0143d1b72.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/lib/flash.self-8f05a5d9328ea28fca100b057787fbfb567986513c5f1735ea48fad8f9571c10.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/lib/has_many.self-ece319debdc01ca5096ae8ac6c130ffc0decab382543b4b94e18591375d3d3bb.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/lib/modal_dialog.self-766fcab3d4b4cea253c79b999c91c278487f6306fc9e176d0fd2168590a63ac4.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/lib/per_page.self-d7697643296439a8f6aadbf22a229d8ce9b4e8e530ca854164398141006bcfda.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/lib/table-checkbox-toggler.self-f5200d732ec9ffd4ee8fd1fe11524ad7b54a67f6c0ef447a29d119ece2dcecdb.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery-ui.self-f96f2ec2a32c4bc4da4292cc74bddeca0bb223d81a421c98c4d613632860945e.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery.self-da8dafbbe883092bcae73f35a8caf4ae6170fe7d8130ae7039a233f9b509c757.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin/application.self-50ffc9f86e474cd52ffb7ce3b3572255ad6646ea17097a056f330b540eae402c.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/assets/active_admin.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-06-09 18:24:51 +0300
+
+
+Started GET "/admin/constructors" for 127.0.0.1 at 2015-06-09 18:24:59 +0300
+Processing by Admin::ConstructorsController#index as HTML
+  [1m[35mAdminUser Load (0.1ms)[0m  SELECT  "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = ?  ORDER BY "admin_users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "constructors" LIMIT 30 OFFSET 0) subquery_for_count[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "constructors" LIMIT 30 OFFSET 0) subquery_for_count
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "constructors"[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT COUNT(count_column) FROM (SELECT  1 AS count_column FROM "constructors" LIMIT 30 OFFSET 0) subquery_for_count
+  [1m[36mConstructor Load (0.1ms)[0m  [1mSELECT  "constructors".* FROM "constructors"  ORDER BY "constructors"."id" desc LIMIT 30 OFFSET 0[0m
+  [1m[35mTemplate Load (0.1ms)[0m  SELECT "templates".* FROM "templates"
+  Rendered /home/dentada/.rvm/gems/ruby-2.2.1/bundler/gems/activeadmin-0b4b22871fd3/app/views/active_admin/resource/index.html.arb (178.6ms)
+Completed 200 OK in 186ms (Views: 180.0ms | ActiveRecord: 1.0ms)
