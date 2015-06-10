@@ -31,6 +31,7 @@ gem 'activeadmin', github: 'activeadmin'
 
 gem 'devise'
 
+gem 'materialize-sass'
 
 
 # Use ActiveModel has_secure_password

@@ -10,6 +10,7 @@ class OperatorsController < ApplicationController
   # GET /operators/1
   # GET /operators/1.json
   def show
+    @operator = Operator.find(params[:id])
   end
 
   # GET /operators/new
