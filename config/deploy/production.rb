@@ -19,7 +19,7 @@ server '178.62.195.216', user: 'deployer', roles: %w{app db web}
 
 role :app, %w{deployer@178.62.195.216}
 role :web, %w{deployer@178.62.195.216}
-role :db,  %w{deploy@178.62.195.216}
+role :db,  %w{deployer@178.62.195.216}
 
 
 

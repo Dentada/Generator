@@ -36,6 +36,17 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 namespace :deploy do
 
+COMMANDS = %w(start stop restart)
+COMMANDS.each do |command|
+	task command do
+		on roles(:app), int :sequence, wait 5 do
+			within current_path do
+				execute :bundle, "exec thin #{command} -C config/thin.yml"
+			end
+		end
+	end
+end
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
