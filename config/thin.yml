@@ -1,0 +1,13 @@
+---
+chdir: /home/deployer/backend/current
+environment: production
+timeout: 30
+log: /home/deployer/backend/current/log/thin.log
+pid: /home/deployer/backend/current/tmp/pids/thin.pid
+socket: /home/deployer/backend/current/tmp/sockets/thin.sock
+max_conns: 1024
+max_persistent_conns: 10
+require: []
+wait: 30
+servers: 2
+daemonize: true
