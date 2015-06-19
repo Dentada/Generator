@@ -33,6 +33,13 @@ gem 'devise'
 
 gem 'materialize-sass'
 
+gem 'mysql2'
+
+gem 'psd'
+
+gem 'carrierwave'
+
+gem 'psd-enginedata', '1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
